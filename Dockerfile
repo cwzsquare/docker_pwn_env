@@ -14,9 +14,10 @@ ENV LC_ALL en_US.UTF-8
 WORKDIR /root
 
 RUN apt-get update && apt-get -y dist-upgrade && apt-get install -y --fix-missing python3 python3-pip python3-dev lib32z1 \
-    xinetd curl gcc gdb gdbserver g++ git libssl-dev libffi-dev build-essential tmux \
+    xinetd curl gcc gdb gdbserver g++ git libssl-dev libffi-dev build-essential \
     vim iputils-ping gdb-multiarch \
     file net-tools socat ruby ruby-dev locales autoconf automake libtool make && \
+    curl -sSL https://github.com/zellij-org/zellij/releases/latest/download/zellij-x86_64-unknown-linux-musl.tar.gz | tar xz -C /tmp && install -Dm755 /tmp/zellij /bin/zellij && rm /tmp/zellij && \
     gem install one_gadget && \
     gem install seccomp-tools && \
     sed -i '/en_US.UTF-8/s/^# //g' /etc/locale.gen && locale-gen
@@ -46,7 +47,6 @@ COPY ./gdb-gef /bin
 COPY ./gdb-pwndbg /bin
 COPY ./update.sh /bin
 COPY ./test-this-container.sh /bin
-COPY ./.tmux.conf ./
 COPY ./.gdbinit ./
 COPY ./flag /
 COPY ./flag /flag.txt
@@ -64,7 +64,6 @@ RUN useradd ${NORMAL_USER_NAME} -d /home/${NORMAL_USER_NAME} -m -s /bin/bash -u 
     cp -r /root/pwntools /home/${NORMAL_USER_NAME} && \
     cp -r /root/Pwngdb /home/${NORMAL_USER_NAME} && \
     cp -r /root/pwncli /home/${NORMAL_USER_NAME} && \
-    cp /root/.tmux.conf /home/${NORMAL_USER_NAME} && \
     cp /root/.gdbinit /home/${NORMAL_USER_NAME} && \
     cp /flag /home/${NORMAL_USER_NAME} && \
     cp /flag.txt /home/${NORMAL_USER_NAME} && \

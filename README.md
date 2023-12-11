@@ -70,6 +70,9 @@ docker run -it -d -v host_path:container_path -p host_port:container_port --cap-
 docker run -it -d -v host_path:container_path -p host_port:container_port --privileged IMAGE_ID # privileged enabled and auto update 给特权标志和自动更新
 
 docker run -it -d -v host_path:container_path -p host_port:container_port --privileged IMAGE_ID /bin/sh # privileged enabled and auto update 给特权标志和自动更新
+
+docker run -it --rm -v $pwd:/home/ctf/test -cap-add=SYS_PTRACE debug_pwn
+_env:23.04 /bin/zellij options --default-shell=zsh # 一个启动容器并使用zellij的示例
 ```
 
 ## Attach Container
@@ -153,4 +156,5 @@ Read `Dockerfile` to get more infomation.
 
 ## Todo
 
-- change tmux to zellij
+- [x] change tmux to zellij
+...
