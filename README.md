@@ -150,3 +150,7 @@ Software and packages in the image:
 Read `Dockerfile` to get more infomation.
 
 阅读`Dockerfile`获得更多信息。
+
+## Todo
+
+- change tmux to zellij
